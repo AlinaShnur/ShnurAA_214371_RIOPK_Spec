@@ -2,9 +2,8 @@
 
 Программное средство реализации сервиса анализа дебиторской задолженности предназначено для загрузки, обработки и визуализации данных о дебиторской задолженности (ДЗ), предоставляя инструменты для её анализа и контроля.
 
-С**Сервер**: [https://github.com/NAVI2734/KotsubaIV_214371_RIOPK_Server](https://github.com/AlinaShnur/ShnurAA_214371_RIOPK_Server)
-**Клиент**: [https://github.com/AlinaShnur/ShnurAA_214371_RIOPK_Client]
-(https://github.com/AlinaShnur/ShnurAA_214371_RIOPK_Client)
+**Сервер**: [https://github.com/AlinaShnur/ShnurAA_214371_RIOPK_Server](https://github.com/AlinaShnur/ShnurAA_214371_RIOPK_Server)
+**Клиент**: [https://github.com/AlinaShnur/ShnurAA_214371_RIOPK_Client](https://github.com/AlinaShnur/ShnurAA_214371_RIOPK_Client)
 ---
 
 ## **Содержание**
