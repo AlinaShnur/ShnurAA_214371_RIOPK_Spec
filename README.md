@@ -1,20 +1,19 @@
-﻿# **Программное средство реализации сервиса анализа дебиторской задолженности**
+﻿﻿# **Программное средство реализации сервиса анализа дебиторской задолженности**
 
-Программное средство реализации сервиса анализа дебиторской задолженности предназначено для загрузки, обработки и визуализации данных о дебиторской задолженности (ДЗ), предоставляя инструменты для её анализа и контроля.
+Цель проекта — загружать, обрабатывать и визуализировать данные о дебиторской задолженности (ДЗ), предоставляя инструменты для её анализа и контроля.
 
-**Сервер**: [https://github.com/AlinaShnur/ShnurAA_214371_RIOPK_Server](https://github.com/AlinaShnur/ShnurAA_214371_RIOPK_Server)  
+**Сервер**: [https://github.com/AlinaShnur/ShnurAA_214371_RIOPK_Server](https://github.com/AlinaShnur/ShnurAA_214371_RIOPK_Server)
 **Клиент**: [https://github.com/AlinaShnur/ShnurAA_214371_RIOPK_Client](https://github.com/AlinaShnur/ShnurAA_214371_RIOPK_Client)
-
 ---
 
 ## **Содержание**
 
-1. [Архитектура](#архитектура)  
-2. [Функциональные возможности](#функциональные-возможности)  
-3. [Детали реализации](#детали-реализации)  
-4. [Тестирование](#тестирование)  
-5. [Установка и запуск](#установка-и-запуск)  
-6. [Лицензия](#лицензия)  
+1. [Архитектура](#архитектура)
+2. [Функциональные возможности](#функциональные-возможности)
+3. [Детали реализации](#детали-реализации)
+4. [Тестирование](#тестирование)
+5. [Установка и запуск](#установка-и-запуск)
+6. [Лицензия](#лицензия)
 7. [Контакты](#контакты)
 
 ---
@@ -23,27 +22,28 @@
 
 ### C4-модель
 
-#### Контекстный уровень  
-![Контекст](docs/1Ур.png)
+#### Контекстный уровень
+![Контекст](docs/Контекстный_уровень.png)
 
-#### Контейнерный уровень  
-![Контейнеры](docs/2Ур.png)
+#### Контейнерный уровень
+![Контейнеры](docs/Контейнерный_уровень.png)
 
-#### Компонентный уровень  
-![Компоненты](docs/3Ур.png)
+#### Компонентный уровень
+![Компоненты](docs/Компонентный_уровень.png)
 
-### Схема данных  
-![ER-модель](docs/Схема данных.png)
+### Схема данных
+![ER-модель](docs/ER_Diagram.png)
 
 ---
 
 ## **Функциональные возможности**
 
-### Диаграмма вариантов использования  
-![Диаграмма вариантов использования](docs/Use Cases.png)
+### Диаграмма вариантов использования
+![Диаграмма вариантов использования](docs/UseCase.png)
 
-### User-flow диаграмма  
-![User Flow](docs/UserFlow Admin.png)
+### User-flow диаграмма
+
+![User Flow](docs/User_Flow.png)
 
 ---
 
@@ -51,10 +51,10 @@
 
 ### UML-диаграммы
 
-#### Диаграмма классов  
+#### Диаграмма классов
 ![Диаграмма классов](docs/UML_Class_Diagram.png)
 
-#### Диаграмма последовательностей  
+#### Диаграмма последовательностей
 ![Диаграмма последовательностей](docs/UML_Sequence_Diagram.png)
 
 ### Спецификация API
@@ -62,24 +62,26 @@
 Открыть в браузере:  
 [http://localhost:3001/api-docs](http://localhost:3001/api-docs/)
 
-OpenAPI YAML-файл: `openapi.json` генерируется автоматически.
+OpenAPI YAML-файл: openapi.json генерируется автоматически.
 
 ### Безопасность
 
 Использована JWT-аутентификация:
-```typescript
+TypeScript
 // src/application/interfaces/IJwtService.ts
 
 export interface JwtPayload {
-    sub: string; // Subject (user ID)
+    sub: string; // Subject (user ID) - Используем sub!
     roles: string[]; // Роли пользователя
-    iat?: number;
-    exp?: number;
+    // Можно добавить стандартные поля JWT, если они нужны
+    iat?: number; // Issued At
+    exp?: number; // Expiration Time
 }
 
 export interface IJwtService {
+    // Изменяем sign, чтобы он принимал только то, что нужно для создания токена
     sign(payload: Pick<JwtPayload, 'sub' | 'roles'>): Promise<string>;
-    verify(token: string): Promise<JwtPayload | null>;
+    verify(token: string): Promise<JwtPayload | null>; // verify возвращает полный payload
 }
 
 export const JwtServiceToken = Symbol('IJwtService');
@@ -95,11 +97,11 @@ export const JwtServiceToken = Symbol('IJwtService');
 
 ### Unit-тесты
 
-Файл: `// tests/application/use-cases/auth/`
+Файл: // tests/application/use-cases/auth/
 
 ### Интеграционные тесты
 
-Файл: `// tests/integration/auth.integration.test.ts`
+Файл: // tests/integration/auth.integration.test.ts
 
 ![Тесты](docs/Тесты1.png)
 ![Тесты](docs/Тесты2.png)
@@ -109,8 +111,8 @@ export const JwtServiceToken = Symbol('IJwtService');
 
 ### Манифесты для сборки docker образов
 
-Файл `Dockerfile`:
-```dockerfile
+Файл Dockerfile:
+dockerfile
 FROM node:18
 WORKDIR /usr/src/app
 COPY package*.json ./
@@ -121,7 +123,7 @@ ENV NODE_ENV=production
 ENV PORT=3001
 EXPOSE ${PORT}
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
-```
+
 
 ## **Лицензия**
 
